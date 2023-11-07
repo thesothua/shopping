@@ -17,6 +17,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import Register from "./user/Register";
+import UserProfile from "./user/UserProfile";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Slide />
             <LatestProduct />
             <Product/>
+        
           </>
         } />
 

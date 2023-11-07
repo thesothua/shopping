@@ -3,7 +3,7 @@ import React from "react";
 
 import Box from "@mui/material/Box";
 // import TextField from "@mui/material/TextField";
-import { TextField } from '@material-ui/core'
+import { TextField } from "@material-ui/core";
 import Button from "@mui/material/Button";
 
 import Avatar from "@mui/material/Avatar";
@@ -13,12 +13,13 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 
-import { Tooltip } from '@material-ui/core'
+import { Tooltip } from "@material-ui/core";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import UserProfile from "./UserProfile";
 
 export default function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -53,11 +54,7 @@ export default function Header() {
               noValidate
               autoComplete="off"
             >
-              <TextField
-                id="outlined-basic"
-                label="Search"
-              />
-
+              <TextField id="outlined-basic" label="Search" />
             </Box>
             <Button
               variant="outlined"
@@ -67,7 +64,7 @@ export default function Header() {
               Outlined
             </Button>
           </div>
-          <div className="col-md-3">
+          <div className="col-md-3 d-flex">
             <React.Fragment>
               <Box
                 sx={{
@@ -76,7 +73,6 @@ export default function Header() {
                   textAlign: "center",
                 }}
               >
-            
                 <Tooltip title="Account settings">
                   <IconButton
                     onClick={handleClick}
@@ -126,7 +122,12 @@ export default function Header() {
                 anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
               >
                 <MenuItem onClick={handleClose}>
-                  <Avatar /> Profile
+                  <Avatar />
+                  {/* <Link className='profile text-decoration-none' to='/profile'>Profile</Link> */}
+                  <span>
+                    {" "}
+                    <UserProfile />{" "}
+                  </span>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
                   <Avatar /> My account
@@ -148,7 +149,9 @@ export default function Header() {
                   <ListItemIcon>
                     <Logout fontSize="small" />
                   </ListItemIcon>
-                  <Link className='login text-decoration-none' to="/login">Log in</Link>
+                  <Link className="login text-decoration-none" to="/login">
+                    Log in
+                  </Link>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
                   <ListItemIcon>
@@ -158,64 +161,9 @@ export default function Header() {
                 </MenuItem>
               </Menu>
             </React.Fragment>
+            <UserProfile />
           </div>
-
-          <div
-            className="modal fade"
-            id="userLogin_form"
-            tabIndex="-1"
-            role="dialog"
-          >
-            <div className="modal-dialog" role="document">
-              <div className="modal-content">
-                <button
-                  type="button"
-                  className="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">×</span>
-                </button>
-                <div className="modal-body">
-                  <form id="" method="POST">
-                    <div className="customer_login">
-                      <h2>login here</h2>
-                      <div className="form-group">
-                        <label>Username</label>
-                        <input
-                          type="email"
-                          className="form-control username"
-                          placeholder="Username"
-                          autoComplete="off"
-                          required=""
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label>Password</label>
-                        <input
-                          type="password"
-                          className="form-control password"
-                          placeholder="password"
-                          autoComplete="off"
-                          required=""
-                        />
-                      </div>
-                      <input
-                        type="submit"
-                        name="login"
-                        className="btn"
-                        value="login"
-                      />
-                      <span>
-                        Don't Have an Account{" "}
-                        <a href="register.php">Register</a>
-                      </span>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
+         
         </div>
       </div>
     </div>
