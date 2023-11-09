@@ -28,7 +28,7 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function ProductCard(prop) {
-  console.log(prop.product_title);
+ 
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -36,7 +36,7 @@ export default function ProductCard(prop) {
   };
 
   return (
-    <div className="col-md-3">
+    <div className={prop.style}>
       <Card sx={{ maxWidth: 345, height: 380 }}>
         {/* <CardHeader className='card-title'
         avatar={

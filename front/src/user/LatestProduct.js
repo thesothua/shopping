@@ -1,11 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import ProductCard from "./ProductCard";
 
-
 export default function LatestProduct() {
+  const [latestproducts, setLatestProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  let token = localStorage.getItem("token");
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/api/latest-product", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    }) // Replace with your actual API URL
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setLatestProducts(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        setLoading(false);
+      });
+  }, []);
+
+ 
+
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -29,8 +58,6 @@ export default function LatestProduct() {
     <div className="container">
       <h1 className="text-center my-5">Latest Products</h1>
 
-      
-
       <Carousel
         responsive={responsive}
         swipeable={false}
@@ -49,12 +76,26 @@ export default function LatestProduct() {
         dotListClass="custom-dot-list-style"
         itemClass="carousel-item-padding-40-px"
       >
-        <div><ProductCard/></div>
-        <div><ProductCard/></div>
-        <div><ProductCard/></div>
-        <div><ProductCard/></div>
+          {latestproducts.map((product) => {
+            return (
+        <div>
+              <ProductCard
+                key={product.product_id}
+                product_title={product.product_title}
+                product_cat={product.product_cat}
+                product_desc={product.product_desc}
+                qty={product.qty}
+                product_brand={product.product_brand}
+                featured_image={product.featured_image}
+                
+              />
+        </div>
+            );
+          })}
       </Carousel>
-      <br /><br /><br />
+      <br />
+      <br />
+      <br />
     </div>
   );
 }

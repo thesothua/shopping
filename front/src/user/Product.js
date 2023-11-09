@@ -5,7 +5,7 @@ import "react-multi-carousel/lib/styles.css";
 import ProductCard from "./ProductCard";
 
 
-export default function LatestProduct() {
+export default function Product() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   let token = localStorage.getItem("token");
@@ -69,6 +69,7 @@ export default function LatestProduct() {
                 qty={product.qty}
                 product_brand={product.product_brand}
                 featured_image={product.featured_image}
+                style={`col-md-3`}
               />
             );
           })}
